@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalize seu Lanche</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos CSS adicionais */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .ingredients {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 10px;
+        }
+
+        .ingredients img {
+            display: block;
+            max-width: 100px; /* Defina o tamanho máximo desejado para as imagens */
+            height: auto;
+            margin: 0 auto;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Monte o seu Lanche</h1>
+        <form id="orderForm">
+            <div id="ingredients" class="ingredients"></div>
+            <h2>Total: <span id="totalPrice">R$ 0.00</span></h2>
+            <button type="button" onclick="checkout()">Finalizar Pedido</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Script JavaScript
+        const ingredients = [
+            { name: 'Hambúrguer', price: 3.00, image: 'https://img.freepik.com/fotos-gratis/hamburguer-delicioso-na-tabua-de-madeira_23-2149235947.jpg?t=st=1711745235~exp=1711748835~hmac=70db03eab5c8546502ecbb515b73297661dabaa9a71c41c8f9be790b36cdd327&w=900' },
+            { name: 'Queijo', price: 1.00, image: 'https://img.freepik.com/fotos-gratis/queijo-na-madeira_573717-86.jpg?t=st=1711745394~exp=1711748994~hmac=7b9ff2e812d2ac059ad8bfc89d70376130f0ab408cc45fe1f922825c45dcfeb4&w=900' },
+            { name: 'Alface', price: 0.50, image: 'https://img.freepik.com/fotos-gratis/alface-colocada-sobre-um-piso-de-madeira-marrom_1150-17287.jpg?t=st=1711745418~exp=1711749018~hmac=9f0a8dea5e18c506410c05f21aac89cc065840d68ab5f1a6b3d2508a36edf488&w=900' },
+            { name: 'Tomate', price: 0.50, image: 'https://img.freepik.com/fotos-gratis/tomates_144627-15413.jpg?t=st=1711745447~exp=1711749047~hmac=3bfdd8465a31ecb2aaa73c45be94784b526328e99d623f8d8ef087ae6452faa4&w=900' },
+            { name: 'Maionese', price: 0.50, image: 'https://img.freepik.com/fotos-gratis/lata-de-maionese-na-superficie-azul_58702-1900.jpg?t=st=1711745514~exp=1711749114~hmac=d8ae3181cdf2e4a2a5ce0e7da8e8ef9c1b8de7c8c8c472f2785ed4e1f7d98e22&w=900' },
+            // Adicione mais ingredientes conforme necessário
+        ];
+
+        let total = 0;
+        let selectedIngredients = [];
+
+        function displayIngredients() {
+            const ingredientsDiv = document.getElementById('ingredients');
+            ingredientsDiv.innerHTML = '';
+            ingredients.forEach(ingredient => {
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = ingredient.name;
+                checkbox.value = ingredient.price;
+                checkbox.addEventListener('change', updateTotal);
+                ingredientsDiv.appendChild(checkbox);
+
+                const label = document.createElement('label');
+                label.textContent = `${ingredient.name} - R$ ${ingredient.price.toFixed(2)}`;
+                ingredientsDiv.appendChild(label);
+
+                const image = document.createElement('img');
+                image.src = ingredient.image; // Adicionando a imagem correspondente
+                image.classList.add('ingredient-image'); // Adicionando a classe para controlar o tamanho da imagem
+                ingredientsDiv.appendChild(image);
+
+                ingredientsDiv.appendChild(document.createElement('br'));
+            });
+        }
+
+        function updateTotal() {
+            total = 0;
+            selectedIngredients = [];
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            checkboxes.forEach(checkbox => {
+                total += parseFloat(checkbox.value);
+                selectedIngredients.push(checkbox.name);
+            });
+            document.getElementById('totalPrice').textContent = `R$ ${total.toFixed(2)}`;
+        }
+
+        function checkout() {
+            if (selectedIngredients.length === 0) {
+                alert('Por favor, selecione pelo menos um ingrediente.');
+                return;
+            }
+
+            const formattedIngredients = selectedIngredients.join(', ');
+            const message = `Pedido: ${formattedIngredients}\nTotal: R$ ${total.toFixed(2)}`;
+
+            // Modifique o número de telefone aqui
+            const phoneNumber = '18991482335';
+
+            // Gerar link para enviar mensagem no WhatsApp
+            const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Abrir o WhatsApp em uma nova janela
+            window.open(whatsappLink, '_blank');
+        }
+
+        window.onload = function() {
+            displayIngredients();
+        };
+    </script>
+</body>
+</html>
