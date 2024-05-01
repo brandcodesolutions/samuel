@@ -8,7 +8,7 @@
     <style>
         /* Estilos CSS adicionais */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f9f9f9;
@@ -26,21 +26,46 @@
         h1 {
             color: #333;
             text-align: center;
+            font-size: 36px;
+            margin-bottom: 20px;
         }
 
-        .ingredients {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            grid-gap: 10px;
+        .ingredient {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.5);
+        }
+
+        label {
+            font-size: 20px;
+        }
+
+        #checkoutForm {
+            display: none;
+        }
+
+        #totalPriceContainer {
+            position: fixed;
+            top: 0;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         }
 
         button {
             display: block;
             margin: 20px auto 0;
             padding: 10px 20px;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
-            background-color: #007bff;
+            background-color: #ff5722;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -49,7 +74,16 @@
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #f44336;
+        }
+
+        #endForm {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #endForm.visible {
+            display: block;
         }
     </style>
 </head>
@@ -57,92 +91,153 @@
     <div class="container">
         <h1>Monte o seu Lanche</h1>
         <form id="orderForm">
-            <div id="ingredients" class="ingredients"></div>
-            <h2>Total: <span id="totalPrice">R$ 0.00</span></h2>
-            <button type="button" onclick="checkout()">Finalizar Pedido</button>
+            <div class="ingredient">
+                <input type="checkbox" id="pao" name="pao" value="5.00">
+                <label for="pao">Pão - R$ 5.00</label>
+            </div>
+            <div class="ingredient">
+                <input type="checkbox" id="alface" name="alface" value="2.00">
+                <label for="alface">Alface - R$ 2.00</label>
+            </div>
+            <div class="ingredient">
+                <input type="checkbox" id="tomate" name="tomate" value="2.00">
+                <label for="tomate">Tomate - R$ 2.00</label>
+            </div>
+            <div class="ingredient">
+                <input type="checkbox" id="batataPalha" name="batataPalha" value="2.00">
+                <label for="batataPalha">Batata Palha - R$ 2.00</label>
+            </div>
+            <div class="ingredient">
+                <input type="checkbox" id="hamburguer" name="hamburguer" value="5.00">
+                <label for="hamburguer">Hambúrguer - R$ 5.00</label>
+            </div>
+            <div class="ingredient">
+                <input type="checkbox" id="calabresa" name="calabresa" value="3.50">
+                <label for="calabresa">Calabresa - R$ 3.50</label>
+            </div>
+            <div class="ingredient">
+                <input type="checkbox" id="frango" name="frango" value="3.50">
+                <label for="frango">Frango - R$ 3.50</label>
+            </div>
+            <div class="ingredient">
+                <input type="checkbox" id="bacon" name="bacon" value="3.50">
+                <label for="bacon">Bacon - R$ 3.50</label>
+            </div>
+            <div class="ingredient">
+                <input type="checkbox" id="ovo" name="ovo" value="3.00">
+                <label for="ovo">Ovo - R$ 3.00</label>
+            </div>
+            <div class="ingredient">
+                <input type="checkbox" id="salsicha" name="salsicha" value="3.00">
+                <label for="salsicha">Salsicha - R$ 3.00</label>
+            </div>
+            <div class="ingredient">
+                <input type="checkbox" id="cebola" name="cebola" value="2.00">
+                <label for="cebola">Cebola - R$ 2.00</label>
+            </div>
+            <div class="ingredient">
+                <input type="checkbox" id="presunto" name="presunto" value="3.00">
+                <label for="presunto">Presunto - R$ 3.00</label>
+            </div>
+            <div class="ingredient">
+                <input type="checkbox" id="mussarela" name="mussarela" value="3.00">
+                <label for="mussarela">Mussarela - R$ 3.00</label>
+            </div>
+            <!-- Molhos dentro do pão -->
+            <div class="ingredient">
+                <input type="checkbox" id="molhoAlho" name="molhoAlho" value="1.00">
+                <label for="molhoAlho">Molho Alho - R$ 1.00</label>
+            </div>
+            <div class="ingredient">
+                <input type="checkbox" id="molhoVerde" name="molhoVerde" value="1.00">
+                <label for="molhoVerde">Molho Verde - R$ 1.00</label>
+            </div>
+            <div class="ingredient">
+                <input type="checkbox" id="molhoAzeitona" name="molhoAzeitona" value="1.00">
+                <label for="molhoAzeitona">Molho Azeitona - R$ 1.00</label>
+            </div>
+            <div class="ingredient">
+                <input type="checkbox" id="molhoKetchup" name="molhoKetchup" value="1.00">
+                <label for="molhoKetchup">Molho Ketchup - R$ 1.00</label>
+            </div>
+            <div class="ingredient">
+                <input type="checkbox" id="molhoMustarda" name="molhoMustarda" value="1.00">
+                <label for="molhoMustarda">Molho Mostarda - R$ 1.00</label>
+            </div>
+            <div class="ingredient">
+                <input type="checkbox" id="molhoMaionese" name="molhoMaionese" value="1.00">
+                <label for="molhoMaionese">Molho Maionese - R$ 1.00</label>
+            </div>
         </form>
     </div>
 
-    <script src="script.js"></script>
+    <div id="totalPriceContainer" style="margin-top: 200px ;">
+        <h2>Total: <span id="totalPrice">R$ 0.00</span></h2>
+        <button type="button" onclick="showEndForm()">Finalizar Pedido</button>
+
+        <div id="endForm">
+            <h2>Endereço de Entrega:</h2>
+            <input type="text" id="endereco" name="endereco" required>
+            <h2>Forma de Pagamento:</h2>
+            <select id="pagamento" name="pagamento" required>
+                <option value="dinheiro">Dinheiro</option>
+                <option value="cartao">Cartão</option>
+            </select>
+            <button type="button" onclick="sendWhatsAppMessage()">Finalizar Pedido</button>
+        </div>
+    </div>
+
+    <div id="endForm">
+        <h2>Endereço de Entrega:</h2>
+        <input type="text" id="endereco" name="endereco" required>
+        <h2>Forma de Pagamento:</h2>
+        <select id="pagamento" name="pagamento" required>
+            <option value="dinheiro">Dinheiro</option>
+            <option value="cartao">Cartão</option>
+        </select>
+        <button type="button" onclick="sendWhatsAppMessage()">Finalizar Pedido</button>
+    </div>
+
     <script>
         // Script JavaScript
-        const ingredients = [
-            { name: 'Pão', price: 5.00 },
-            { name: 'Alface', price: 2.00 },
-            { name: 'Tomate', price: 2.00 },
-            { name: 'Batata palha', price: 2.00 },
-            { name: 'Hambúrguer', price: 5.00 },
-            { name: 'Calabresa', price: 3.50 },
-            { name: 'Frango', price: 3.50 },
-            { name: 'Bacon', price: 3.50 },
-            { name: 'Ovo', price: 3.00 },
-            { name: 'Salsicha', price: 3.00 },
-            { name: 'Cebola', price: 2.00 },
-            { name: 'Presunto', price: 3.00 },
-            { name: 'Mussarela', price: 3.00 },
-            { name: 'Molho alho', price: 2.00 },
-            { name: 'Molho verde', price: 2.00 },
-            { name: 'Molho azeitona', price: 2.00 },
-            { name: 'Molho ketchup', price: 2.00 },
-            { name: 'Molho mostarda', price: 2.00 },
-            { name: 'Molho maionese', price: 2.00 },
-            // Adicione mais ingredientes conforme necessário
-        ];
-
         let total = 0;
-        let selectedIngredients = [];
-
-        function displayIngredients() {
-            const ingredientsDiv = document.getElementById('ingredients');
-            ingredientsDiv.innerHTML = '';
-            ingredients.forEach(ingredient => {
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.name = ingredient.name;
-                checkbox.value = ingredient.price;
-                checkbox.addEventListener('change', updateTotal);
-                ingredientsDiv.appendChild(checkbox);
-
-                const label = document.createElement('label');
-                label.textContent = `${ingredient.name} - R$ ${ingredient.price.toFixed(2)}`;
-                ingredientsDiv.appendChild(label);
-
-                ingredientsDiv.appendChild(document.createElement('br'));
-            });
-        }
 
         function updateTotal() {
             total = 0;
-            selectedIngredients = [];
             const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
             checkboxes.forEach(checkbox => {
                 total += parseFloat(checkbox.value);
-                selectedIngredients.push(checkbox.name);
             });
             document.getElementById('totalPrice').textContent = `R$ ${total.toFixed(2)}`;
         } 
 
-        function checkout() {
-            if (selectedIngredients.length === 0) {
-                alert('Por favor, selecione pelo menos um ingrediente.');
-                return;
-            }
+        function showEndForm() {
+            document.getElementById('endForm').classList.add('visible');
+        }
 
-            const formattedIngredients = selectedIngredients.join(', ');
-            const message = `Pedido: ${formattedIngredients}\nTotal: R$ ${total.toFixed(2)}`;
+        function sendWhatsAppMessage() {
+            const endereco = document.getElementById('endereco').value;
+            const pagamento = document.getElementById('pagamento').value;
+            const selectedIngredients = [];
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            checkboxes.forEach(checkbox => {
+                selectedIngredients.push(checkbox.nextElementSibling.textContent.trim());
+            });
+            const ingredientsText = selectedIngredients.join(', ');
+            const message = `Endereço: ${endereco}\nForma de Pagamento: ${pagamento}\nIngredientes: ${ingredientsText}\nTotal: R$ ${total.toFixed(2)}`;
 
-            // Modifique o número de telefone aqui
-            const phoneNumber = '18991482335';
+            const phoneNumber = '5518991482335'; // Alterado para (55) 18991482335
 
-            // Gerar link para enviar mensagem no WhatsApp
             const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             
-            // Abrir o WhatsApp em uma nova janela
             window.open(whatsappLink, '_blank');
         }
 
         window.onload = function() {
-            displayIngredients();
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateTotal);
+            });
         };
     </script>
 </body>
