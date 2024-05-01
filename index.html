@@ -34,13 +34,6 @@
             grid-gap: 10px;
         }
 
-        .ingredients img {
-            display: block;
-            max-width: 100px; /* Defina o tamanho máximo desejado para as imagens */
-            height: auto;
-            margin: 0 auto;
-        }
-
         button {
             display: block;
             margin: 20px auto 0;
@@ -74,11 +67,25 @@
     <script>
         // Script JavaScript
         const ingredients = [
-            { name: 'Hambúrguer', price: 3.00, image: 'https://img.freepik.com/fotos-gratis/hamburguer-delicioso-na-tabua-de-madeira_23-2149235947.jpg?t=st=1711745235~exp=1711748835~hmac=70db03eab5c8546502ecbb515b73297661dabaa9a71c41c8f9be790b36cdd327&w=900' },
-            { name: 'Queijo', price: 1.00, image: 'https://img.freepik.com/fotos-gratis/queijo-na-madeira_573717-86.jpg?t=st=1711745394~exp=1711748994~hmac=7b9ff2e812d2ac059ad8bfc89d70376130f0ab408cc45fe1f922825c45dcfeb4&w=900' },
-            { name: 'Alface', price: 0.50, image: 'https://img.freepik.com/fotos-gratis/alface-colocada-sobre-um-piso-de-madeira-marrom_1150-17287.jpg?t=st=1711745418~exp=1711749018~hmac=9f0a8dea5e18c506410c05f21aac89cc065840d68ab5f1a6b3d2508a36edf488&w=900' },
-            { name: 'Tomate', price: 0.50, image: 'https://img.freepik.com/fotos-gratis/tomates_144627-15413.jpg?t=st=1711745447~exp=1711749047~hmac=3bfdd8465a31ecb2aaa73c45be94784b526328e99d623f8d8ef087ae6452faa4&w=900' },
-            { name: 'Maionese', price: 0.50, image: 'https://img.freepik.com/fotos-gratis/lata-de-maionese-na-superficie-azul_58702-1900.jpg?t=st=1711745514~exp=1711749114~hmac=d8ae3181cdf2e4a2a5ce0e7da8e8ef9c1b8de7c8c8c472f2785ed4e1f7d98e22&w=900' },
+            { name: 'Pão', price: 5.00 },
+            { name: 'Alface', price: 2.00 },
+            { name: 'Tomate', price: 2.00 },
+            { name: 'Batata palha', price: 2.00 },
+            { name: 'Hambúrguer', price: 5.00 },
+            { name: 'Calabresa', price: 3.50 },
+            { name: 'Frango', price: 3.50 },
+            { name: 'Bacon', price: 3.50 },
+            { name: 'Ovo', price: 3.00 },
+            { name: 'Salsicha', price: 3.00 },
+            { name: 'Cebola', price: 2.00 },
+            { name: 'Presunto', price: 3.00 },
+            { name: 'Mussarela', price: 3.00 },
+            { name: 'Molho alho', price: 2.00 },
+            { name: 'Molho verde', price: 2.00 },
+            { name: 'Molho azeitona', price: 2.00 },
+            { name: 'Molho ketchup', price: 2.00 },
+            { name: 'Molho mostarda', price: 2.00 },
+            { name: 'Molho maionese', price: 2.00 },
             // Adicione mais ingredientes conforme necessário
         ];
 
@@ -100,11 +107,6 @@
                 label.textContent = `${ingredient.name} - R$ ${ingredient.price.toFixed(2)}`;
                 ingredientsDiv.appendChild(label);
 
-                const image = document.createElement('img');
-                image.src = ingredient.image; // Adicionando a imagem correspondente
-                image.classList.add('ingredient-image'); // Adicionando a classe para controlar o tamanho da imagem
-                ingredientsDiv.appendChild(image);
-
                 ingredientsDiv.appendChild(document.createElement('br'));
             });
         }
@@ -118,7 +120,7 @@
                 selectedIngredients.push(checkbox.name);
             });
             document.getElementById('totalPrice').textContent = `R$ ${total.toFixed(2)}`;
-        }
+        } 
 
         function checkout() {
             if (selectedIngredients.length === 0) {
