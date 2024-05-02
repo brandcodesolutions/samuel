@@ -70,7 +70,7 @@
             padding: 10px 20px;
             font-size: 18px;
             font-weight: bold;
-            background-color: #ff5722;
+            background-color: #eac42a;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -79,7 +79,8 @@
         }
 
         button:hover {
-            background-color: #f44336;
+            background-color: #c09a00;
+            
         }
 
         #endForm {
@@ -136,14 +137,33 @@
     }
 
     footer {
-        background-color: #333;
-        color: #fff;
-        text-align: center;
-        padding: 20px 0;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-    }
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0; /* Reduz o espaçamento vertical */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex; /* Usa flexbox para alinhar os itens */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: space-between; /* Espaçamento uniforme entre os elementos */
+}
+
+.logo img {
+    max-width: 150px; /* Define a largura máxima do logotipo */
+    height: auto; /* Permite que a altura seja ajustada automaticamente */
+}
+
+p {
+    margin: 0; /* Remove margem padrão do parágrafo */
+    padding: 0 20px; /* Adiciona espaço às margens internas para melhorar a legibilidade */
+}
+
+
+.logo {
+    max-width: 200px; /* Define a largura máxima do logotipo */
+    margin: 0 auto; /* Centraliza o logotipo horizontalmente */
+}
+
 
     /* Adicionando margem no final da página */
     body {
@@ -201,6 +221,12 @@
         background-color: #f0f0f0;
         color: #333;
     }
+
+    footer a {
+    text-decoration: none;
+    color: inherit; /* Para manter a cor padrão dos links */
+}
+
 
 </style>
     </style>
@@ -413,7 +439,7 @@
     </script>
 
     <div id="totalPriceContainer" style="margin-top: px ;">
-        <h2>Total: <span id="totalPrice">R$ 0.00</span></h2>
+        <h2 >Total: <span id="totalPrice">R$ 0.00</span></h2>
         <button type="button" onclick="showEndForm()">Digitar Endereço</button>
         <button class="smallButton" onclick="toggleTutorial()">Tutorial</button>
 
@@ -553,9 +579,14 @@
 
 
 
-<!-- <footer>
-    <p>&copy; 2024 BrandCode Solutions. Todos os direitos reservados.</p>
-</footer>-->
+<footer>
+    <div class="logo">
+        <img src="imagens/2dfdcd94-38b7-4b02-83e4-d6d6cc0c4b1e.jpg" alt="Logo da BrandCode Solutions">
+    </div>
+    <p>&copy; <a href="seu/link/aqui">2024 BrandCode Solutions.</a> Todos os direitos reservados.</p>
+</footer>
+
+
 
 </body>
 </html>
