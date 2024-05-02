@@ -513,28 +513,30 @@
     }
 
     function sendWhatsAppMessage() {
-        if (total < pedidoMinimo) {
-            alert(`O pedido mínimo é de R$ ${pedidoMinimo.toFixed(2)}.`);
-            return;
-        }
-
-        const endereco = document.getElementById('endereco').value;
-        const pagamento = document.getElementById('pagamento').value;
-        const selectedIngredients = [];
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-        checkboxes.forEach(checkbox => {
-            const ingredientName = checkbox.nextElementSibling.textContent.trim().split(' - ')[0]; // Removendo o valor
-            selectedIngredients.push(ingredientName);
-        });
-        const ingredientsText = selectedIngredients.join(', ');
-        const message = `Endereço: ${endereco}\nForma de Pagamento: ${pagamento}\nIngredientes: ${ingredientsText}\nTotal: R$ ${total.toFixed(2)}`;
-
-        const phoneNumber = '5518991482335'; // Alterado para (55) 18991482335
-
-        const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-        
-        window.open(whatsappLink, '_blank');
+    if (total < pedidoMinimo) {
+        alert(`O pedido mínimo é de R$ ${pedidoMinimo.toFixed(2)}.`);
+        return;
     }
+
+    const endereco = document.getElementById('endereco').value;
+    const pagamento = document.getElementById('pagamento').value;
+    const selectedIngredients = [];
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    checkboxes.forEach(checkbox => {
+        const ingredientName = checkbox.nextElementSibling.textContent.trim().split(' - ')[0]; // Removendo o valor
+        const quantityElement = checkbox.parentElement.querySelector('span');
+        const quantity = parseInt(quantityElement.textContent);
+        selectedIngredients.push(`${ingredientName} (Quantidade: ${quantity})`);
+    });
+    const ingredientsText = selectedIngredients.join(', ');
+    const message = `Endereço: ${endereco}\nForma de Pagamento: ${pagamento}\nIngredientes: ${ingredientsText}\nTotal: R$ ${total.toFixed(2)}`;
+
+    const phoneNumber = '5518991482335'; // Alterado para (55) 18991482335
+
+    const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    
+    window.open(whatsappLink, '_blank');
+}
 
     window.onload = function() {
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
