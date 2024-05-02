@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personalize seu Lanche</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-42ntG7kubvYos70bxacuJ9zW6fSN3pFh2HFGNMG4n8yFsuSgMYaorZz3uZbRRSjz" crossorigin="anonymous">
+
     <style>
         /* Estilos CSS adicionais */
         body {
@@ -86,7 +88,7 @@
             display: block;
         }
 
-        <style>
+        
     #totalPriceContainer {
         position: fixed;
         top: 0;
@@ -221,6 +223,8 @@
         <button type="button" onclick="showEndForm()">Digitar Endereço</button>
 
         <div id="endForm">
+            <button id="btnVoltar" onclick="hideEndForm()" style="font-size: 0.8em;">Voltar</button>
+
             <h2>Endereço de Entrega:</h2>
             <input type="text" id="endereco" name="endereco" required>
             <h2>Forma de Pagamento:</h2>
@@ -232,7 +236,17 @@
         </div>
     </div>
 
-   
+    <script>
+        function showEndForm() {
+            document.getElementById("endForm").style.display = "block";
+            document.getElementById("btnVoltar").style.display = "block"; // Mostrar o botão Voltar
+        }
+    
+        function hideEndForm() {
+            document.getElementById("endForm").style.display = "none";
+            document.getElementById("btnVoltar").style.display = "none"; // Ocultar o botão Voltar novamente
+        }
+    </script>
 
     <script>
         // Script JavaScript
