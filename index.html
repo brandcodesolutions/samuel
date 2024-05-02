@@ -149,97 +149,273 @@
     body {
         margin-bottom: 100px; /* Ajuste conforme a altura do footer */
     }
+        /* Estilo do tutorial */
+        .tutorial {
+            position: absolute;
+            top: 150px; /* Ajuste conforme necessário */
+            left: 20px; /* Ajuste conforme necessário */
+            width: 300px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            z-index: 1000; /* Para garantir que fique sobre outros elementos */
+            display: none;
+        }
+
+        .passo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .passo .numero {
+            width: 30px;
+            height: 30px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .passo .texto {
+            flex: 1;
+        }
+
+        .passo .seta {
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid #007bff;
+            margin-right: 10px;
+        }
+
+        .smallButton {
+        font-size: 14px;
+        padding: 5px 10px;
+        background-color: #f0f0f0;
+        color: #333;
+    }
 
 </style>
     </style>
 </head>
 <body>
-    <div class="container">
+
+   
+    </head>
+    <body>
+    
+    <div class="tutorial">
+        <div class="passo">
+            <div class="numero">1</div>
+            <div class="texto">Escolha os itens desejados no menu.</div>
+            <div class="seta"></div>
+        </div>
+        <div class="passo">
+            <div class="numero">2</div>
+            <div class="texto">Clique em "Digitar Endereço" para inserir seu endereço de entrega.</div>
+            <div class="seta"></div>
+        </div>
+        <div class="passo">
+            <div class="numero">3</div>
+            <div class="texto">Por fim, clique em "Finalizar Pedido" para concluir sua compra.</div>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 50px ;">
         <h1>Monte o seu Lanche</h1>
         <form id="orderForm">
             <div class="ingredient">
-                <input type="checkbox" id="pao" name="pao" value="5.00">
+                <input  type="checkbox" id="pao" name="pao" value="5.00" onchange="toggleQuantityButtons('pao')">
                 <label for="pao">Pão - R$ 5.00</label>
+                <button class="smallButton" type="button" class="btn-minus" id="paoMinus" style="display: none;" onclick="decrementQuantity('pao')">-</button>
+                <span id="paoQuantity" style="display: none;">0</span>
+                <button class="smallButton" type="button" class="btn-plus" id="paoPlus" style="display: none;" onclick="incrementQuantity('pao')">+</button>
             </div>
             <div class="ingredient">
-                <input type="checkbox" id="alface" name="alface" value="2.00">
+                <input type="checkbox" id="alface" name="alface" value="2.00" onchange="toggleQuantityButtons('alface')">
                 <label for="alface">Alface - R$ 2.00</label>
+                <button class="smallButton btn-minus" type="button" id="alfaceMinus" style="display: none;" onclick="decrementQuantity('alface')">-</button>
+                <span id="alfaceQuantity" style="display: none;">0</span>
+                <button class="smallButton btn-plus" type="button" id="alfacePlus" style="display: none;" onclick="incrementQuantity('alface')">+</button>
             </div>
             <div class="ingredient">
-                <input type="checkbox" id="tomate" name="tomate" value="2.00">
+                <input type="checkbox" id="tomate" name="tomate" value="2.00" onchange="toggleQuantityButtons('tomate')">
                 <label for="tomate">Tomate - R$ 2.00</label>
+                <button class="smallButton btn-minus" type="button" id="tomateMinus" style="display: none;" onclick="decrementQuantity('tomate')">-</button>
+                <span id="tomateQuantity" style="display: none;">0</span>
+                <button class="smallButton btn-plus" type="button" id="tomatePlus" style="display: none;" onclick="incrementQuantity('tomate')">+</button>
             </div>
             <div class="ingredient">
-                <input type="checkbox" id="batataPalha" name="batataPalha" value="2.00">
+                <input type="checkbox" id="batataPalha" name="batataPalha" value="2.00" onchange="toggleQuantityButtons('batataPalha')">
                 <label for="batataPalha">Batata Palha - R$ 2.00</label>
+                <button class="smallButton btn-minus" type="button" id="batataPalhaMinus" style="display: none;" onclick="decrementQuantity('batataPalha')">-</button>
+                <span id="batataPalhaQuantity" style="display: none;">0</span>
+                <button class="smallButton btn-plus" type="button" id="batataPalhaPlus" style="display: none;" onclick="incrementQuantity('batataPalha')">+</button>
             </div>
+            
+
+            <hr>
+
+            <h1 style="font-size: 25px ;">Frituras:</h1>
+
             <div class="ingredient">
-                <input type="checkbox" id="hamburguer" name="hamburguer" value="5.00">
+                <input type="checkbox" id="hamburguer" name="hamburguer" value="5.00" onchange="toggleQuantityButtons('hamburguer')">
                 <label for="hamburguer">Hambúrguer - R$ 5.00</label>
+                <button class="smallButton btn-minus" type="button" id="hamburguerMinus" style="display: none;" onclick="decrementQuantity('hamburguer')">-</button>
+                <span id="hamburguerQuantity" style="display: none;">0</span>
+                <button class="smallButton btn-plus" type="button" id="hamburguerPlus" style="display: none;" onclick="incrementQuantity('hamburguer')">+</button>
             </div>
+            
             <div class="ingredient">
-                <input type="checkbox" id="calabresa" name="calabresa" value="3.50">
+                <input type="checkbox" id="calabresa" name="calabresa" value="3.50" onchange="toggleQuantityButtons('calabresa')">
                 <label for="calabresa">Calabresa - R$ 3.50</label>
+                <button class="smallButton btn-minus" type="button" id="calabresaMinus" style="display: none;" onclick="decrementQuantity('calabresa')">-</button>
+                <span id="calabresaQuantity" style="display: none;">0</span>
+                <button class="smallButton btn-plus" type="button" id="calabresaPlus" style="display: none;" onclick="incrementQuantity('calabresa')">+</button>
             </div>
+            
             <div class="ingredient">
-                <input type="checkbox" id="frango" name="frango" value="3.50">
+                <input type="checkbox" id="frango" name="frango" value="3.50" onchange="toggleQuantityButtons('frango')">
                 <label for="frango">Frango - R$ 3.50</label>
+                <button class="smallButton btn-minus" type="button" id="frangoMinus" style="display: none;" onclick="decrementQuantity('frango')">-</button>
+                <span id="frangoQuantity" style="display: none;">0</span>
+                <button class="smallButton btn-plus" type="button" id="frangoPlus" style="display: none;" onclick="incrementQuantity('frango')">+</button>
             </div>
+            
             <div class="ingredient">
-                <input type="checkbox" id="bacon" name="bacon" value="3.50">
+                <input type="checkbox" id="bacon" name="bacon" value="3.50" onchange="toggleQuantityButtons('bacon')">
                 <label for="bacon">Bacon - R$ 3.50</label>
+                <button class="smallButton btn-minus" type="button" id="baconMinus" style="display: none;" onclick="decrementQuantity('bacon')">-</button>
+                <span id="baconQuantity" style="display: none;">0</span>
+                <button class="smallButton btn-plus" type="button" id="baconPlus" style="display: none;" onclick="incrementQuantity('bacon')">+</button>
             </div>
+            
             <div class="ingredient">
-                <input type="checkbox" id="ovo" name="ovo" value="3.00">
+                <input type="checkbox" id="ovo" name="ovo" value="3.00" onchange="toggleQuantityButtons('ovo')">
                 <label for="ovo">Ovo - R$ 3.00</label>
+                <button class="smallButton btn-minus" type="button" id="ovoMinus" style="display: none;" onclick="decrementQuantity('ovo')">-</button>
+                <span id="ovoQuantity" style="display: none;">0</span>
+                <button class="smallButton btn-plus" type="button" id="ovoPlus" style="display: none;" onclick="incrementQuantity('ovo')">+</button>
             </div>
+            
             <div class="ingredient">
-                <input type="checkbox" id="salsicha" name="salsicha" value="3.00">
+                <input type="checkbox" id="salsicha" name="salsicha" value="3.00" onchange="toggleQuantityButtons('salsicha')">
                 <label for="salsicha">Salsicha - R$ 3.00</label>
+                <button class="smallButton btn-minus" type="button" id="salsichaMinus" style="display: none;" onclick="decrementQuantity('salsicha')">-</button>
+                <span id="salsichaQuantity" style="display: none;">0</span>
+                <button class="smallButton btn-plus" type="button" id="salsichaPlus" style="display: none;" onclick="incrementQuantity('salsicha')">+</button>
             </div>
+            
             <div class="ingredient">
-                <input type="checkbox" id="cebola" name="cebola" value="2.00">
+                <input type="checkbox" id="cebola" name="cebola" value="2.00" onchange="toggleQuantityButtons('cebola')">
                 <label for="cebola">Cebola - R$ 2.00</label>
+                <button class="smallButton btn-minus" type="button" id="cebolaMinus" style="display: none;" onclick="decrementQuantity('cebola')">-</button>
+                <span id="cebolaQuantity" style="display: none;">0</span>
+                <button class="smallButton btn-plus" type="button" id="cebolaPlus" style="display: none;" onclick="incrementQuantity('cebola')">+</button>
             </div>
+   <hr>         
+            <h1 style="font-size: 25px ;">Frios:</h1>
+
+ 
             <div class="ingredient">
-                <input type="checkbox" id="presunto" name="presunto" value="3.00">
+                <input type="checkbox" id="presunto" name="presunto" value="3.00" onchange="toggleQuantityButtons('presunto')">
                 <label for="presunto">Presunto - R$ 3.00</label>
+                <button class="smallButton btn-minus" type="button" id="presuntoMinus" style="display: none;" onclick="decrementQuantity('presunto')">-</button>
+                <span id="presuntoQuantity" style="display: none;">0</span>
+                <button class="smallButton btn-plus" type="button" id="presuntoPlus" style="display: none;" onclick="incrementQuantity('presunto')">+</button>
             </div>
             <div class="ingredient">
-                <input type="checkbox" id="mussarela" name="mussarela" value="3.00">
+                <input type="checkbox" id="mussarela" name="mussarela" value="3.00" onchange="toggleQuantityButtons('mussarela')">
                 <label for="mussarela">Mussarela - R$ 3.00</label>
+                <button class="smallButton btn-minus" type="button" id="mussarelaMinus" style="display: none;" onclick="decrementQuantity('mussarela')">-</button>
+                <span id="mussarelaQuantity" style="display: none;">0</span>
+                <button class="smallButton btn-plus" type="button" id="mussarelaPlus" style="display: none;" onclick="incrementQuantity('mussarela')">+</button>
             </div>
-            <!-- Molhos dentro do pão -->
-            <div class="ingredient">
-                <input type="checkbox" id="molhoAlho" name="molhoAlho" value="1.00">
-                <label for="molhoAlho">Molho Alho - R$ 1.00</label>
-            </div>
-            <div class="ingredient">
-                <input type="checkbox" id="molhoVerde" name="molhoVerde" value="1.00">
-                <label for="molhoVerde">Molho Verde - R$ 1.00</label>
-            </div>
-            <div class="ingredient">
-                <input type="checkbox" id="molhoAzeitona" name="molhoAzeitona" value="1.00">
-                <label for="molhoAzeitona">Molho Azeitona - R$ 1.00</label>
-            </div>
-            <div class="ingredient">
-                <input type="checkbox" id="molhoKetchup" name="molhoKetchup" value="1.00">
-                <label for="molhoKetchup">Molho Ketchup - R$ 1.00</label>
-            </div>
-            <div class="ingredient">
-                <input type="checkbox" id="molhoMustarda" name="molhoMustarda" value="1.00">
-                <label for="molhoMustarda">Molho Mostarda - R$ 1.00</label>
-            </div>
-            <div class="ingredient">
-                <input type="checkbox" id="molhoMaionese" name="molhoMaionese" value="1.00">
-                <label for="molhoMaionese">Molho Maionese - R$ 1.00</label>
-            </div>
+            
+            <hr>
+            <h1 style="font-size: 25px;">Molhos dentro do pão:</h1>
+            
+<!-- Molhos dentro do pão -->
+<div class="ingredient">
+    <input type="checkbox" id="molhoAlho" name="molhoAlho" value="0.00">
+    <label for="molhoAlho">Molho Alho - R$ 0.00</label>
+</div>
+
+<div class="ingredient">
+    <input type="checkbox" id="molhoVerde" name="molhoVerde" value="0.00">
+    <label for="molhoVerde">Molho Verde - R$ 0.00</label>
+</div>
+
+<div class="ingredient">
+    <input type="checkbox" id="molhoAzeitona" name="molhoAzeitona" value="0.00">
+    <label for="molhoAzeitona">Molho Azeitona - R$ 0.00</label>
+</div>
+
+<div class="ingredient">
+    <input type="checkbox" id="molhoKetchup" name="molhoKetchup" value="0.00">
+    <label for="molhoKetchup">Molho Ketchup - R$ 0.00</label>
+</div>
+
+<div class="ingredient">
+    <input type="checkbox" id="molhoMustarda" name="molhoMustarda" value="0.00">
+    <label for="molhoMustarda">Molho Mostarda - R$ 0.00</label>
+</div>
+
+<div class="ingredient">
+    <input type="checkbox" id="molhoMaionese" name="molhoMaionese" value="0.00">
+    <label for="molhoMaionese">Molho Maionese - R$ 0.00</label>
+</div>
+
+            
         </form>
     </div>
+
+    <script>
+        // Função para alternar a exibição dos botões de quantidade
+        function toggleQuantityButtons(ingredient) {
+            var checkbox = document.getElementById(ingredient);
+            var minusButton = document.getElementById(ingredient + 'Minus');
+            var quantityElement = document.getElementById(ingredient + 'Quantity');
+            var plusButton = document.getElementById(ingredient + 'Plus');
+    
+            if (checkbox.checked) {
+                minusButton.style.display = 'inline-block';
+                quantityElement.style.display = 'inline-block';
+                plusButton.style.display = 'inline-block';
+            } else {
+                minusButton.style.display = 'none';
+                quantityElement.style.display = 'none';
+                plusButton.style.display = 'none';
+            }
+        }
+    
+        // Função para incrementar a quantidade
+        function incrementQuantity(ingredient) {
+            var quantityElement = document.getElementById(ingredient + 'Quantity');
+            var currentQuantity = parseInt(quantityElement.textContent);
+            quantityElement.textContent = currentQuantity + 1;
+        }
+    
+        // Função para decrementar a quantidade
+        function decrementQuantity(ingredient) {
+            var quantityElement = document.getElementById(ingredient + 'Quantity');
+            var currentQuantity = parseInt(quantityElement.textContent);
+            if (currentQuantity > 0) {
+                quantityElement.textContent = currentQuantity - 1;
+            }
+        }
+    </script>
 
     <div id="totalPriceContainer" style="margin-top: px ;">
         <h2>Total: <span id="totalPrice">R$ 0.00</span></h2>
         <button type="button" onclick="showEndForm()">Digitar Endereço</button>
+        <button class="smallButton" onclick="toggleTutorial()">Tutorial</button>
 
         <div id="endForm">
             <button id="btnVoltar" onclick="hideEndForm()" style="font-size: 0.8em;">Voltar</button>
@@ -267,52 +443,117 @@
         }
     </script>
 
-    <script>
-        // Script JavaScript
-        let total = 0;
+<script>
+    function toggleTutorial() {
+        var tutorial = document.querySelector('.tutorial');
+        if (tutorial.style.display === 'block' || window.getComputedStyle(tutorial).display === 'block') {
+            tutorial.style.display = 'none';
+            document.removeEventListener('click', closeTutorialOutside);
+        } else {
+            tutorial.style.display = 'block';
+            document.addEventListener('click', closeTutorialOutside);
+        }
+    }
 
-        function updateTotal() {
-            total = 0;
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-            checkboxes.forEach(checkbox => {
-                total += parseFloat(checkbox.value);
-            });
-            document.getElementById('totalPrice').textContent = `R$ ${total.toFixed(2)}`;
-        } 
+    function closeTutorialOutside(event) {
+        var tutorial = document.querySelector('.tutorial');
+        if (!tutorial.contains(event.target) && event.target.getAttribute('onclick') !== 'toggleTutorial()') {
+            tutorial.style.display = 'none';
+            document.removeEventListener('click', closeTutorialOutside);
+        }
+    }
+</script>
 
-        function showEndForm() {
-            document.getElementById('endForm').classList.add('visible');
+<script>
+    // Script JavaScript
+    let total = 0;
+    const pedidoMinimo = 10;
+
+    function updateTotal() {
+        total = 0;
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        checkboxes.forEach(checkbox => {
+            const quantityElement = checkbox.parentElement.querySelector('span');
+            const quantity = parseInt(quantityElement.textContent);
+            total += parseFloat(checkbox.value) * quantity;
+        });
+        document.getElementById('totalPrice').textContent = `R$ ${total.toFixed(2)}`;
+    }
+
+    function incrementQuantity(ingredient) {
+        var quantityElement = document.getElementById(ingredient + 'Quantity');
+        var currentQuantity = parseInt(quantityElement.textContent);
+        quantityElement.textContent = currentQuantity + 1;
+        updateTotal();
+    }
+
+    function decrementQuantity(ingredient) {
+        var quantityElement = document.getElementById(ingredient + 'Quantity');
+        var currentQuantity = parseInt(quantityElement.textContent);
+        if (currentQuantity > 0) {
+            quantityElement.textContent = currentQuantity - 1;
+            updateTotal();
+        }
+    }
+
+    function showEndForm() {
+        const endereco = document.getElementById('endereco').value;
+        const pagamento = document.getElementById('pagamento').value;
+
+        if (total < pedidoMinimo) {
+            alert(`O pedido mínimo é de R$ ${pedidoMinimo.toFixed(2)}.`);
+            return;
         }
 
-        function sendWhatsAppMessage() {
-            const endereco = document.getElementById('endereco').value;
-            const pagamento = document.getElementById('pagamento').value;
-            const selectedIngredients = [];
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-            checkboxes.forEach(checkbox => {
-                selectedIngredients.push(checkbox.nextElementSibling.textContent.trim());
-            });
-            const ingredientsText = selectedIngredients.join(', ');
-            const message = `Endereço: ${endereco}\nForma de Pagamento: ${pagamento}\nIngredientes: ${ingredientsText}\nTotal: R$ ${total.toFixed(2)}`;
+        document.getElementById('endForm').classList.add('visible');
+    }
 
-            const phoneNumber = '5518991482335'; // Alterado para (55) 18991482335
+    function hideEndForm() {
+        document.getElementById('endForm').classList.remove('visible');
+    }
 
-            const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            
-            window.open(whatsappLink, '_blank');
+    function sendWhatsAppMessage() {
+        if (total < pedidoMinimo) {
+            alert(`O pedido mínimo é de R$ ${pedidoMinimo.toFixed(2)}.`);
+            return;
         }
 
-        window.onload = function() {
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', updateTotal);
-            });
-        };
-    </script>
+        const endereco = document.getElementById('endereco').value;
+        const pagamento = document.getElementById('pagamento').value;
+        const selectedIngredients = [];
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        checkboxes.forEach(checkbox => {
+            const ingredientName = checkbox.nextElementSibling.textContent.trim().split(' - ')[0]; // Removendo o valor
+            selectedIngredients.push(ingredientName);
+        });
+        const ingredientsText = selectedIngredients.join(', ');
+        const message = `Endereço: ${endereco}\nForma de Pagamento: ${pagamento}\nIngredientes: ${ingredientsText}\nTotal: R$ ${total.toFixed(2)}`;
 
-<footer>
+        const phoneNumber = '5518991482335'; // Alterado para (55) 18991482335
+
+        const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        
+        window.open(whatsappLink, '_blank');
+    }
+
+    window.onload = function() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateTotal);
+        });
+    };
+</script>
+
+
+
+
+
+
+
+
+<!-- <footer>
     <p>&copy; 2024 BrandCode Solutions. Todos os direitos reservados.</p>
-</footer>
+</footer>-->
 
 </body>
 </html>
