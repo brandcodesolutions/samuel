@@ -85,6 +85,51 @@
         #endForm.visible {
             display: block;
         }
+
+        <style>
+    #totalPriceContainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #ffffff; /* Cor de fundo opcional */
+        padding: 10px;
+        z-index: 1000; /* Para garantir que fique sobre outros elementos */
+    }
+    /* Opcional: Estilo para melhorar a aparência */
+    #totalPriceContainer h2 {
+        margin: 0;
+    }
+    #totalPriceContainer button {
+        margin-top: 10px;
+    }
+    #endForm {
+        display: none; /* Ocultar o formulário de endereço inicialmente */
+    }
+
+    body {
+        padding-top: 60px; /* Ajuste conforme a altura do #totalPriceContainer */
+    }
+    #totalPriceContainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #ffffff; /* Cor de fundo opcional */
+        padding: 10px;
+        z-index: 1000; /* Para garantir que fique sobre outros elementos */
+    }
+    /* Opcional: Estilo para melhorar a aparência */
+    #totalPriceContainer h2 {
+        margin: 0;
+    }
+    #totalPriceContainer button {
+        margin-top: 10px;
+    }
+    #endForm {
+        display: none; /* Ocultar o formulário de endereço inicialmente */
+    }
+</style>
     </style>
 </head>
 <body>
@@ -171,9 +216,9 @@
         </form>
     </div>
 
-    <div id="totalPriceContainer" style="margin-top: 200px ;">
+    <div id="totalPriceContainer" style="margin-top: px ;">
         <h2>Total: <span id="totalPrice">R$ 0.00</span></h2>
-        <button type="button" onclick="showEndForm()">Finalizar Pedido</button>
+        <button type="button" onclick="showEndForm()">Digitar Endereço</button>
 
         <div id="endForm">
             <h2>Endereço de Entrega:</h2>
@@ -183,20 +228,11 @@
                 <option value="dinheiro">Dinheiro</option>
                 <option value="cartao">Cartão</option>
             </select>
-            <button type="button" onclick="sendWhatsAppMessage()">Finalizar Pedido</button>
+            <button style="background-color: rgb(0, 94, 0) ;" type="button" onclick="sendWhatsAppMessage()">Finalizar Pedido</button>
         </div>
     </div>
 
-    <div id="endForm">
-        <h2>Endereço de Entrega:</h2>
-        <input type="text" id="endereco" name="endereco" required>
-        <h2>Forma de Pagamento:</h2>
-        <select id="pagamento" name="pagamento" required>
-            <option value="dinheiro">Dinheiro</option>
-            <option value="cartao">Cartão</option>
-        </select>
-        <button type="button" onclick="sendWhatsAppMessage()">Finalizar Pedido</button>
-    </div>
+   
 
     <script>
         // Script JavaScript
