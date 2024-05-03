@@ -498,13 +498,20 @@ p {
     }
 
     function decrementQuantity(ingredient) {
-        var quantityElement = document.getElementById(ingredient + 'Quantity');
-        var currentQuantity = parseInt(quantityElement.textContent);
-        if (currentQuantity > 0) {
-            quantityElement.textContent = currentQuantity - 1;
-            updateTotal();
+    const quantityElement = document.getElementById(ingredient + 'Quantity');
+    const currentQuantity = parseInt(quantityElement.textContent);
+    if (currentQuantity === 1) {
+        quantityElement.textContent = currentQuantity - 1;
+        updateTotal();
+        // Enable the plus button for Pão and Alface
+        if (ingredient === 'pao' || ingredient === 'alface' || ingredient === 'tomate' || ingredient === 'batataPalha' || ingredient === 'calabresa' || ingredient === 'frango' || ingredient === 'bacon'   || ingredient === 'cebola') {
+            document.getElementById(ingredient + 'Plus').disabled = false;
         }
+    } else if (currentQuantity > 0) {
+        quantityElement.textContent = currentQuantity - 1;
+        updateTotal();
     }
+}
 
     function showEndForm() {
         const endereco = document.getElementById('endereco').value;
@@ -563,7 +570,7 @@ p {
 
 
 
-<footer>
+<footer style="">
     <div class="logo">
         <img src="imagens/2dfdcd94-38b7-4b02-83e4-d6d6cc0c4b1e.jpg" alt="Logo da BrandCode Solutions">
     </div>
